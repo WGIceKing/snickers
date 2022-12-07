@@ -2,6 +2,7 @@ import csv
 import os
 from Levenshtein import distance
 from repeat_removal import RepeatRemoval
+from censore import Censore
 
 
 class FileReader:
@@ -39,7 +40,9 @@ def levstn(word_list):
 def main():
     example = ['kurwa', 'jebać', 'gniazdo', 'Maciek', 'rura', 'kuuuuuuuuurwa']
     example = RepeatRemoval.RemoveRepeated(example)
-    print(levstn(example))
+    words_to_censore = levstn(example)
+    censored_text = Censore.ApplyCensorship(example, words_to_censore)
+    print(censored_text)
 
 if __name__ == '__main__':
     main()
