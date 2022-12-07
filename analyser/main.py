@@ -1,6 +1,6 @@
 import csv
 
-class readFile:
+class FileReader:
 
     def __init__(self, fileName):
         self.fileName = fileName
@@ -11,11 +11,3 @@ class readFile:
         fileObj.close()
         self.words = words
 
-
-def main():
-    temporary = readFile('example.csv')
-    temporary.read()
-    print(temporary.words[0], temporary.words[1])
-
-if __name__ == "__main__":
-    main()
