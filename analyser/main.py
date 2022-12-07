@@ -2,7 +2,7 @@ import csv
 import os
 from math import sqrt
 from Levenshtein import distance
-from repeat_removal import RepeatRemoval
+from input_preprocessing import InputPreprocessing
 from censore import Censore
 
 class FileReader:
@@ -39,11 +39,12 @@ def levstn(word_list):
         
 
 def main():
-    sentence = 'Kurwa wymyślać, przekleństwa muszę japierdole onomatopeja chędożenie chedozenie'
-    example = sentence.split()
-    example = RepeatRemoval.RemoveRepeated(example)
+    sentence = 'Kurwa wymyślać, przekleństwa, muszę, japierdole? onomatopeja! chędożenie, chedozenie. kurwa. kurwa, kurwa! kurwa!!! chodzenie!!!'
+    sentence_words = sentence.split()
+    example = sentence_words
+    example = InputPreprocessing.ProcessInput(example)
     words_to_censore = levstn(example) # List of indexes
-    censored_text = Censore.ApplyCensorship(example, words_to_censore)
+    censored_text = Censore.ApplyCensorship(sentence_words, words_to_censore)
     # TODO: cesored_text to file
     print(censored_text)
 

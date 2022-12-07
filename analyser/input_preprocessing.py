@@ -12,8 +12,8 @@ dict = {'1' : 'i',
         'vv': 'w'}
 
 
-class RepeatRemoval():
-    def RemoveRepeated(word_list):
+class InputPreprocessing():
+    def ProcessInput(word_list):
 
         return_list = []
         for word in word_list:
