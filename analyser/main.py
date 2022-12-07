@@ -1,9 +1,9 @@
 import csv
 import os
+from math import sqrt
 from Levenshtein import distance
 from repeat_removal import RepeatRemoval
 from censore import Censore
-
 
 class FileReader:
 
@@ -28,8 +28,9 @@ def levstn(word_list):
         for curse in curse_dict:
             curse = curse.rstrip()
             lev = distance(word, curse)
-            if lev <= 2:
+            if lev <= sqrt(len(word)) - 1:
                 curses_list.append(index)
+                # print(word, ' ', lev, ' ', curse)
                 break
             
         index += 1
@@ -38,10 +39,12 @@ def levstn(word_list):
         
 
 def main():
-    example = ['kurwa', 'jebać', 'gniazdo', 'Maciek', 'rura', 'kuuuuuuuuurwa']
+    sentence = 'Kurwa wymyślać, przekleństwa muszę japierdole onomatopeja chędożenie chedozenie'
+    example = sentence.split()
     example = RepeatRemoval.RemoveRepeated(example)
-    words_to_censore = levstn(example)
+    words_to_censore = levstn(example) # List of indexes
     censored_text = Censore.ApplyCensorship(example, words_to_censore)
+    # TODO: cesored_text to file
     print(censored_text)
 
 if __name__ == '__main__':

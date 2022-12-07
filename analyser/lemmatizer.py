@@ -4,7 +4,7 @@ import spacy
 # python -m spacy download pl_core_news_sm
 class Lemmatizer:
 
-    def lemmatize(this, words):
+    def lemmatize(words):
         nlp = spacy.load("pl_core_news_sm")
         doc = nlp(" ".join(words))
         return [token.lemma_ for token in doc]
