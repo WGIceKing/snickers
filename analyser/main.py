@@ -30,7 +30,6 @@ def levstn(word_list):
             lev = distance(word, curse, weights=(1, 1, 1))
             if lev <= sqrt(len(word)) - 1.5:
                 curses_list.append(index)
-                # print(word, ' ', lev, ' ', curse)
                 break
 
             if previous_word != None:
@@ -44,7 +43,6 @@ def levstn(word_list):
                 if lev <= sqrt(len(subject)) - 1.5:
                     curses_list.append(index)
                     curses_list.append(index - 1)
-                    # print(word, ' ', lev, ' ', curse)
                     break
         
         previous_word = word

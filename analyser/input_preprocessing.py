@@ -11,7 +11,6 @@ dict = {'1' : 'i',
         'vv': 'w',
         'v': 'u'}
 
-
 class InputPreprocessing():
     def ProcessInput(word_list):
 
