@@ -5,26 +5,15 @@ from Levenshtein import distance
 from input_preprocessing import InputPreprocessing
 from censore import Censore
 
-class FileReader:
-
-    def __init__(self, fileName):
-        self.fileName = fileName
-
-    def read(self):
-        fileObj = open(self.fileName, "r")
-        words = fileObj.read().split()
-        fileObj.close()
-        self.words = words
-
 def levstn(word_list):
-    fpath = r'..\data\refactored.txt'
-    fpath2 = r'..\data\refactored_2.txt'
+    fpath = '../data/refactored.txt'
+    fpath2 = '../data/refactored_2.txt'
     curses_list = []
 
     with open(fpath, 'r', encoding='utf-8') as f:
         curse_dict = f.readlines()
     
-    with open(fpath, 'r', encoding='utf-8') as f:
+    with open(fpath2, 'r', encoding='utf-8') as f:
         curse_pref_dict = f.readlines()
 
     curse_dict = curse_dict + curse_pref_dict
@@ -65,14 +54,18 @@ def levstn(word_list):
     return curses_list
 
 def main():
-    sentence = 'Cześc, jestem Maciek, lubię krowa kurwa KvRVV4 i kur wy ch00j.'
+    fineName = 'message.txt'
+    with open(fineName, 'r', encoding='utf-8') as f:
+        sentence = f.read()
     sentence_words = sentence.split()
     example = sentence_words
     example = InputPreprocessing.ProcessInput(example)
     words_to_censore = levstn(example) # List of indexes
     censored_text = Censore.ApplyCensorship(sentence_words, words_to_censore)
-    # TODO: cesored_text to file
     print(censored_text)
+    fineName = 'message_filtred.txt'
+    with open(fineName, 'w', encoding='utf-8') as f:
+        f.write(' '.join(sentence_words))
 
 if __name__ == '__main__':
     main()
