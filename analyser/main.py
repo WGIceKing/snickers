@@ -18,28 +18,54 @@ class FileReader:
 
 def levstn(word_list):
     fpath = r'..\data\refactored.txt'
+    fpath2 = r'..\data\refactored_2.txt'
     curses_list = []
 
     with open(fpath, 'r', encoding='utf-8') as f:
         curse_dict = f.readlines()
+    
+    with open(fpath, 'r', encoding='utf-8') as f:
+        curse_pref_dict = f.readlines()
+
+    curse_dict = curse_dict + curse_pref_dict
 
     index = 0
+    previous_word = None
     for word in word_list:
         for curse in curse_dict:
             curse = curse.rstrip()
-            lev = distance(word, curse)
-            if lev <= sqrt(len(word)) - 1:
+            if curse in word:
+                curses_list.append(index)
+                break
+
+            lev = distance(word, curse, weights=(1, 1, 1))
+            if lev <= sqrt(len(word)) - 1.5:
                 curses_list.append(index)
                 # print(word, ' ', lev, ' ', curse)
                 break
+
+            if previous_word != None:
+                subject = previous_word + word
+                if curse == subject:
+                    curses_list.append(index)
+                    curses_list.append(index - 1)
+                    break
+
+                lev = distance(subject, curse)
+                if lev <= sqrt(len(subject)) - 1.5:
+                    curses_list.append(index)
+                    curses_list.append(index - 1)
+                    # print(word, ' ', lev, ' ', curse)
+                    break
+        
+        previous_word = word
             
         index += 1
     
     return curses_list
-        
 
 def main():
-    sentence = 'Kurwa wymyślać, przekleństwa, muszę, japierdole? onomatopeja! chędożenie, chedozenie. kurwa. kurwa, kurwa! kurwa!!! chodzenie!!!'
+    sentence = 'Cześc, jestem Maciek, lubię krowa kurwa KvRVV4 i kur wy ch00j.'
     sentence_words = sentence.split()
     example = sentence_words
     example = InputPreprocessing.ProcessInput(example)

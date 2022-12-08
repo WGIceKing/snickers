@@ -8,8 +8,8 @@ dict = {'1' : 'i',
         '7': 't',
         '8': 'b',
         '0': 'o',
-        'v': 'u',
-        'vv': 'w'}
+        'vv': 'w',
+        'v': 'u'}
 
 
 class InputPreprocessing():
