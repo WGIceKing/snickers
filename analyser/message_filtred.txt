@@ -1,1 +1,1 @@
-jeden dwa trzy ***** cztery ***** pięć **** sześć
+To jest przykładowy plik, pokazujący działanie naszego programu. Cenzuruje on wszsytkie polskie przekleństwa. *** ** ***.

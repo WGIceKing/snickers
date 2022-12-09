@@ -60,7 +60,7 @@ def main():
     example = InputPreprocessing.ProcessInput(example)
     words_to_censore = levstn(example) # List of indexes
     censored_text = Censore.ApplyCensorship(sentence_words, words_to_censore)
-    print(censored_text)
+    print(' '.join(censored_text))
     fineName = 'message_filtred.txt'
     with open(fineName, 'w', encoding='utf-8') as f:
         f.write(' '.join(sentence_words))
